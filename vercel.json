@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/dist/index.html"
+    }
+  ],
+  "env": {
+    "FRONTEND_URL": "http://localhost:5173",
+    "MONGO_URI": "<your_mongo_uri>",
+    "PORT": "8000",
+    "ACCESS_TOKEN_SECRET": "<your_access_token_secret>",
+    "REFRESH_TOKEN_SECRET": "<your_refresh_token_secret>",
+    "NODE_ENV": "production"
+  }
+}
