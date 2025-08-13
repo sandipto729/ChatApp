@@ -1,0 +1,237 @@
+// Variables
+$primary-color: #2563eb;
+$primary-hover: #1d4ed8;
+$primary-disabled: #93c5fd;
+$danger-color: #dc2626;
+$text-primary: #1f2937;
+$text-secondary: #6b7280;
+$text-muted: #9ca3af;
+$border-color: #d1d5db;
+$border-focus: #3b82f6;
+$background: #f9fafb;
+$card-background: #ffffff;
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Mixins
+@mixin transition($property: all, $duration: 0.2s, $timing: ease-in-out) {
+  transition: $property $duration $timing;
+}
+
+@mixin focus-ring {
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem;
+
+  @media (max-width: 640px) {
+    padding: 0.5rem;
+  }
+}
+
+.loginCard {
+  background: $card-background;
+  border-radius: 1rem;
+  box-shadow: $shadow-lg;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 640px) {
+    padding: 2rem 1.5rem;
+    border-radius: 0.75rem;
+  }
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.025em;
+
+    @media (max-width: 640px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 0.25rem;
+  }
+
+  input {
+    padding: 0.875rem 1rem;
+    border: 2px solid $border-color;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    @include transition(border-color);
+    background: $card-background;
+    color: $text-primary;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:hover {
+      border-color: darken($border-color, 10%);
+    }
+
+    &:focus {
+      border-color: $border-focus;
+      @include focus-ring;
+    }
+
+    &:disabled {
+      background-color: $background;
+      color: $text-muted;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 640px) {
+      padding: 0.75rem;
+    }
+  }
+}
+
+.errorMessage {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: $danger-color;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: "⚠️";
+    margin-right: 0.5rem;
+  }
+}
+
+.loginButton {
+  background: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  @include transition(all);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: $primary-disabled;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  @include focus-ring;
+
+  @media (max-width: 640px) {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loginFooter {
+  margin-top: 2rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f3f4f6;
+
+  p {
+    color: $text-secondary;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+.registerLink {
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 600;
+  @include transition(color);
+
+  &:hover {
+    color: $primary-hover;
+    text-decoration: underline;
+  }
+
+  @include focus-ring;
+}
